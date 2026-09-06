@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>بوابة المرور الرقمية الآمنة - الجمهورية</title>
+    <style>
+        :root {
+            --primary-color: #006233; /* الأخضر الرسمي */
+            --accent-color: #D21034;  /* الأحمر الرسمي */
+            --bg-color: #f8fafc;
+            --card-bg: #ffffff;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+        }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Cairo', 'Segoe UI', Tahoma, sans-serif;
+        }
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .portal-card {
+            background: var(--card-bg);
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            text-align: center;
+            max-width: 500px;
+            width: 100%;
+            border-top: 5px solid var(--primary-color);
+            border-bottom: 5px solid var(--accent-color);
+        }
+        .emblem-placeholder {
+            font-size: 40px;
+            margin-bottom: 15px;
+        }
+        h1 {
+            font-size: 20px;
+            color: var(--text-main);
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+        .subtitle {
+            color: var(--text-muted);
+            font-size: 14px;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+        .queue-box {
+            background: #f1f5f9;
+            border: 1px solid #e2e8f0;
+            padding: 25px;
+            border-radius: 8px;
+            margin-bottom: 25px;
+        }
+        .queue-label {
+            font-size: 13px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .queue-number {
+            font-size: 42px;
+            font-weight: 800;
+            color: var(--primary-color);
+            margin-top: 5px;
+        }
+        .status-info {
+            font-size: 14px;
+            color: var(--text-main);
+            margin-bottom: 20px;
+        }
+        .spinner {
+            width: 30px;
+            height: 30px;
+            border: 3px solid #e2e8f0;
+            border-top: 3px solid var(--primary-color);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px auto;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .footer-text {
+            font-size: 11px;
+            color: #94a3b8;
+            border-top: 1px solid #f1f5f9;
+            padding-top: 15px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="portal-card">
+        <div class="emblem-placeholder">🏛️</div>
+        <h1>بوابة الخدمة الرقمية المؤمنة</h1>
+        <p class="subtitle">حرصاً منا على ضمان استقرار الخدمات الرقمية وتمكين كافة المواطنين من الاطلاع على النتائج بسلاسة، تم تنظيم الدخول عبر نظام الطابور الرقمي العادل.</p>
+        
+        <div class="queue-box">
+            <div class="queue-label">ترتيبك الحالي في الطابور</div>
+            <div class="queue-number" id="queuePosition">412</div>
+        </div>
+
+        <div class="spinner"></div>
+        <div class="status-info">جاري معالجة الطلب وتحديث الدور تلقائياً... يرجى عدم إغلاق الصفحة.</div>
+
+        <div class="footer-text">نظام إدارة الأحمال الذكي - حماية وتأمين البنية التحتية الوطنية</div>
+    </div>
+
+    <script>
+        // محاكاة حية لتناقص الطابور بانتظام وثبات
+        let position = 412;
+        const positionElement = document.getElementById('queuePosition');
+
+        const interval = setInterval(() => {
+            if (position > 1) {
+                position -= Math.floor(Math.random() * 4) + 2;
+                if (position < 1) position = 1;
+                positionElement.textContent = position;
+            } else {
+                clearInterval(interval);
+                document.querySelector('.status-info').textContent = "تم تحويلك بنجاح إلى منصة النتائج...";
+                document.querySelector('.status-info').style.color = "#006233";
+                document.querySelector('.spinner').style.display = "none";
+            }
+        }, 3000);
+    </script>
+</body>
+</html>
